@@ -22,6 +22,6 @@ Log data: s3://udacity-dend/log_data
         start_time, hour, day, week, month, year, weekday
 
 ## Contents
-    1. etl.py reads data from S3, processes that data using Spark, and writes them back to S3
-    1. dl.cfg contains AWS credentials
-    1. README.md provides discussion on process and decisions
+1. etl.py reads data from S3, processes that data using Spark, and writes them back to S3
+1. dl.cfg contains AWS credentials
+1. README.md provides discussion on process and decisions
