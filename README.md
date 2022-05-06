@@ -8,10 +8,10 @@ Song data: s3://udacity-dend/song_data
 Log data: s3://udacity-dend/log_data
 
 ## Fact Table
-songplays - records in log data associated with song plays i.e. records with page NextSong
+    songplays - records in log data associated with song plays i.e. records with page NextSong
         songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent
 
-# Dimension Tables
+## Dimension Tables
     users - users in the app
         user_id, first_name, last_name, gender, level
     songs - songs in music database
@@ -21,7 +21,7 @@ songplays - records in log data associated with song plays i.e. records with pag
     time - timestamps of records in songplays broken down into specific units
         start_time, hour, day, week, month, year, weekday
 
-# Contents
-    etl.py reads data from S3, processes that data using Spark, and writes them back to S3
-    dl.cfg contains AWS credentials
-    README.md provides discussion on process and decisions
+## Contents
+    1. etl.py reads data from S3, processes that data using Spark, and writes them back to S3
+    1. dl.cfg contains AWS credentials
+    1. README.md provides discussion on process and decisions
