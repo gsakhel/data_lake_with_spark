@@ -4,8 +4,8 @@
 The purpose of this project is to provide a structured database on a distributed cloud cluster. This will allow for analysis of large datasets.
 
 ## Data Sources
-Song data: s3://udacity-dend/song_data
-Log data: s3://udacity-dend/log_data
+1. Song data: s3://udacity-dend/song_data
+1. Log data: s3://udacity-dend/log_data
 
 ## Fact Table
     songplays - records in log data associated with song plays i.e. records with page NextSong
