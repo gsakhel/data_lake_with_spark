@@ -136,8 +136,8 @@ def main():
 
     """
     spark = create_spark_session()
-    input_data = "s3://udacity-dend/"
-    output_data = "s3://udacity-demobucket-2/data_lake"
+    input_data = "s3n://udacity-dend/"
+    output_data = "s3n://udacity-demobucket-2/data_lake"
     
     process_song_data(spark, input_data, output_data)    
     process_log_data(spark, input_data, output_data)
