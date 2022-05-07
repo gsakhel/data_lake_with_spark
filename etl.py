@@ -49,9 +49,9 @@ def process_song_data(spark, input_data, output_data):
                 StructField('artist_name', StringType(), True),
                 StructField('duration', FloatType(), True),
                 StructField('num_songs', IntegerType(), True),
-                StructField('year', IntegerType(), True),
                 StructField('song_id', StringType(), False),
                 StructField('title', StringType(), True),
+                StructField('year', IntegerType(), True)
 
             ])
 
@@ -102,7 +102,7 @@ def process_log_data(spark, input_data, output_data):
             StructField('registration', StringType(), True),
             StructField('sessionId', IntegerType(), True),
             StructField('song', StringType(), True),
-            StructField('status', StringType(), True),
+            StructField('status', StringType(), True),  
             StructField('ts', FloatType(), True),
             StructField('userAgent', StringType(), True),
             StructField('userId', StringType(), False)
@@ -143,6 +143,20 @@ def process_log_data(spark, input_data, output_data):
     time_table.write.mode('overwrite') \
                     .partitionBy('year', 'month') \
                     .parquet(output_data + 'time_table')
+
+    # Set song data schema
+    song_schema = StructType([
+                StructField("artist_id", StringType(), False), 
+                StructField('artist_latitude', FloatType(), True),
+                StructField('artist_location', StringType(), True),
+                StructField('artist_longitude', FloatType(), True),
+                StructField('artist_name', StringType(), True),
+                StructField('duration', FloatType(), True),
+                StructField('num_songs', IntegerType(), True),
+                StructField('song_id', StringType(), False),
+                StructField('title', StringType(), True),
+                StructField('year', IntegerType(), True)
+            ])
 
     # read in song data to use for songplays table
     song_df = spark.read.json(input_data + 'song_data/*/*/*/*.json')
