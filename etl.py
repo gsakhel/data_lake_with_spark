@@ -6,7 +6,7 @@ from pyspark.sql.functions import udf, col, monotonically_increasing_id
 from pyspark.sql.functions import year, month, dayofmonth, hour, weekofyear, dayofweek, date_format
 import pyspark.sql.types as T
 
-
+# Enter Credentials
 config = configparser.ConfigParser()
 config.read('dl.cfg')
 
@@ -15,6 +15,11 @@ os.environ['AWS_SECRET_ACCESS_KEY']=config['AWS']['AWS_SECRET_ACCESS_KEY']
 
 
 def create_spark_session():
+    """Spark Session Creator
+
+    Returns:
+        SparkSession
+    """
     spark = SparkSession \
         .builder \
         .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:2.7.0") \
@@ -23,6 +28,14 @@ def create_spark_session():
 
 
 def process_song_data(spark, input_data, output_data):
+    """ETL song data. Creates song and artist tables then writes the as parquet files
+
+    Args:
+        spark: spark session
+        input_data: song datasource
+        output_data: parquet storage
+
+    """
     # get filepath to song data file
     song_data = input_data + 'song_data/*/*/*/*.json'
     
@@ -46,6 +59,14 @@ def process_song_data(spark, input_data, output_data):
 
 
 def process_log_data(spark, input_data, output_data):
+    """ETL log data. Creates user, time, and songplay tables then writes them as parquet files
+
+    Args:
+        spark: spark session
+        input_data: user log datasource
+        output_data: parquet storage
+
+    """
     # get filepath to log data file
     log_data = input_data + 'log_data/*/*/*.json'
 
@@ -104,13 +125,16 @@ def process_log_data(spark, input_data, output_data):
 
     # write songplays table to parquet files partitioned by year and month
     songplays_table.withColumn('year', year('start_time')) \
-                .withColumn('month', month('start_time')) \
-                .write.mode('overwrite') \
-                .partitionBy('year','month') \
-                .parquet(output_data + 'songplay_table')
+                   .withColumn('month', month('start_time')) \
+                   .write.mode('overwrite') \
+                   .partitionBy('year','month') \
+                   .parquet(output_data + 'songplay_table')
 
 
 def main():
+    """Run full ETL for song and log data
+
+    """
     spark = create_spark_session()
     input_data = "s3://udacity-dend/"
     output_data = "s3://udacity-demobucket-2/data_lake"
