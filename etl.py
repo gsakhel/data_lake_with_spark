@@ -105,7 +105,7 @@ def process_log_data(spark, input_data, output_data):
             StructField('status', StringType(), True),
             StructField('ts', FloatType(), True),
             StructField('userAgent', StringType(), True),
-            StructField('userId', IntegerType(), False)
+            StructField('userId', StringType(), False)
         ])
 
     # read log data file
